@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-push-2 col-sm-6 col-sm-push-3 text-center">
+      <em><p>"What does that mean?"</p></em>
+      <form>
+        <mat-form-field>
+        <input type="text" class="form-control"
+               required
+               name="vocabword" #vocabword placeholder="enter vocab word here...">
+        </mat-form-field>
+        <button md-raised-button class="btn btn-default" (click)="getDefinition(vocabword.value)" type="button">Define</button>
+      </form>
+      <div *ngIf="vocabword.invalid"> 
+        <p [hidden]="!vocabword.errors.required" class="error">Please enter a word.</p>
+      </div>  
+      <!-- <div *ngIf="errorMsg">
+        <p [hidden] class="error">{{ errorMsg }}</p>
+      </div>   -->
+    </div>
+  </div>
+</div>
