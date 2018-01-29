@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -7,22 +8,28 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 
+const DEFINITION_KEY = makeStateKey('definition');
+
 @Injectable()
 export class DefinitionService {
 
-  private baseUrl = 'https://od-api.oxforddictionaries.com/api/v1/entries/en/';
-
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private state: TransferState
   ) { }
 
-    getDefinition(vocabword: string) {
-      const headers = { 'app_id': '3e23ba37', 'app_key': '90da04772846856a4fc02a7146753d12' };
-      // headers.append('app_id', '3e23ba37');
-      // headers.append('app_key', '90da04772846856a4fc02a7146753d12');
-      // const options = new RequestOptions({headers: headers});
+    getDefinition(vocabword) {
 
-      return this.http.get(`${this.baseUrl}${vocabword}`, {headers})
-      .map((res: any) => console.log(res));
+      return this.http.post('http://localhost:1337/definition/', vocabword)
+      .map((res: any) => {
+        console.log(res);
+        return res.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
+      })
+      .catch(this._errorHandler);
+    }
+
+    private _errorHandler(error: Response) {
+      console.error(error);
+      return Observable.throw(error || 'Server Error');
     }
 }

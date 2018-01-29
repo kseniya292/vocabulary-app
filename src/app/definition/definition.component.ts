@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { WordsService } from '../words.service';
+import { DefinitionService } from '../definition.service';
 
 @Component({
   selector: 'app-definition',
@@ -6,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./definition.component.css']
 })
 export class DefinitionComponent implements OnInit {
+  word: string;
+  definition: string;
 
-  constructor() { }
+  constructor(
+    private wordsService: WordsService,
+  ) {
+    this.definition = this.wordsService.getDefinition();
+    this.word = this.wordsService.getWord();
+   }
 
   ngOnInit() {
   }
