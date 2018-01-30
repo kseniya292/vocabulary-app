@@ -1,3 +1,10 @@
-<p>
-  vocab-list works!
-</p>
+<div class="container">
+  <h2>My Saved Words</h2>
+  <p>click on word to see details</p>
+  <ul>
+      <li *ngFor="let word of wordList">
+          <a [routerLink]="['/details', word.id]">{{ word.word }}</a>
+      </li>
+    </ul>
+  <button md-raised-button class="btn btn-default"  type="button" routerLink="/">Search Another Word</button>
+</div> <!--container-->

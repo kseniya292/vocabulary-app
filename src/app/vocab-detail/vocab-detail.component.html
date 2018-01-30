@@ -1,3 +1,6 @@
-<p>
-  vocab-detail works!
-</p>
+<div class="container">
+  <h3>{{ wordData?.word }}</h3>
+  <p>{{ wordData?.definition }}</p>
+  <button md-raised-button class="btn btn-default"  type="button" routerLink="/list">Back to my List</button>
+  <button md-raised-button class="btn btn-default"  type="button" routerLink="/">Search Another Word</button>
+</div> <!--container-->

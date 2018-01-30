@@ -19,6 +19,16 @@ export class DefinitionComponent implements OnInit {
     this.word = this.wordsService.getWord();
    }
 
+   postWord() {
+     this.wordsService.saveWord({
+       word: this.word,
+       definition: this.definition
+     })
+     .subscribe(
+      res => console.log(res),
+      err => console.log(err));
+   }
+
   ngOnInit() {
   }
 

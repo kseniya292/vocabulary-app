@@ -18,7 +18,6 @@ export class WordsService {
   }
 
   sendWord(data) {
-    console.log(data);
     this.word = data;
   }
 
@@ -30,17 +29,38 @@ export class WordsService {
     return this.word;
   }
 
-  // postWord(data): Observable<any> {
-  //   return this.http.post(`http://localhost:1337/words/`, data)
-  //   .map(res => res.json())
-  //   .catch(this._errorHandler);
-  // }
+  saveWord(data) {
+    return this.http.post(`http://localhost:1337/words/`, data)
+    .map(res => {
+      console.log(res);
+    })
+    .catch(this._errorHandler);
+  }
 
-  // getWords() {
-  //   return this.http.get(`http://localhost:1337/words/`)
-  //   .map(res => res.json())
-  //   .catch(this._errorHandler);
-  // }
+  getWords(): Observable<any> {
+    return this.http.get(`http://localhost:1337/words/`)
+    .map((res: Observable<any>) => {
+      const words = [];
+      res.forEach((word) => {
+        words.push({
+          word : word.word,
+          definition: word.definition,
+          id: word.id,
+        });
+      });
+      return words;
+    })
+    .catch(this._errorHandler);
+  }
+
+  getWordDetails(id: number): Observable<any> {
+    return this.http.get(`http://localhost:1337/words/${id}/`)
+    .map((res: Observable<any>) => {
+      console.log('res', res);
+      return res;
+    })
+    .catch(this._errorHandler);
+  }
 
   private _errorHandler(error: Response): Observable<any> {
     console.error(error);
