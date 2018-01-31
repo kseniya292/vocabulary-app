@@ -4,6 +4,9 @@ import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
 
+const WORDS_KEY = makeStateKey('words');
+const WORD_DEFINITION_KEY = makeStateKey('wordDefinition');
+
 @Injectable()
 export class WordsService {
   definition;
@@ -11,6 +14,7 @@ export class WordsService {
 
   constructor(
     private http: HttpClient,
+    private state: TransferState
   ) { }
 
   sendDefinition(data) {
@@ -38,6 +42,11 @@ export class WordsService {
   }
 
   getWords(): Observable<any> {
+    const words = this.state.get(WORDS_KEY, null as any);
+    if (words) {
+      return Observable.of(words);
+    }
+
     return this.http.get(`http://localhost:1337/words/`)
     .map((res: Observable<any>) => {
       const words = [];
@@ -48,16 +57,23 @@ export class WordsService {
           id: word.id,
         });
       });
+      this.state.set(WORDS_KEY, words as any);
       return words;
     })
     .catch(this._errorHandler);
   }
 
   getWordDetails(id: number): Observable<any> {
+    let wordDefinition = this.state.get(WORD_DEFINITION_KEY, null as any);
+    if (wordDefinition && wordDefinition.id === id) {
+      return Observable.of(wordDefinition);
+    }
+
     return this.http.get(`http://localhost:1337/words/${id}/`)
     .map((res: Observable<any>) => {
-      console.log('res', res);
-      return res;
+      wordDefinition = res;
+      this.state.set(WORD_DEFINITION_KEY, wordDefinition as any);
+      return wordDefinition;
     })
     .catch(this._errorHandler);
   }

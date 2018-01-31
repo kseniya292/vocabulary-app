@@ -23,7 +23,6 @@ export class VocabDetailComponent implements OnInit {
       this.wordsService.getWordDetails(this.id)
       .subscribe(details => {
         this.wordData = details;
-        console.log('details', this.wordData);
       });
     });
   }

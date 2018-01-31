@@ -22,7 +22,6 @@ export class DefinitionService {
 
       return this.http.post('http://localhost:1337/definition/', vocabword)
       .map((res: any) => {
-        console.log(res);
         return res.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
       })
       .catch(this._errorHandler);
