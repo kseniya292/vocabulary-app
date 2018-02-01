@@ -32,9 +32,13 @@ export class SearchComponent implements OnInit {
       // navigate to definition component
       this.router.navigate(['/definition']);
     },
-    error => this.errorMsg = 'server is down'
-  );
-
+    error => {
+      if (error.status === 404) {
+        this.errorMsg = 'This word was not found. Please try a different word.';
+      } else {
+        this.errorMsg = 'server is down';
+      }
+    });
   }
 
   ngOnInit() {
