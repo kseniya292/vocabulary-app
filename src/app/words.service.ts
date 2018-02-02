@@ -33,11 +33,15 @@ export class WordsService {
     return this.word;
   }
 
+  deleteWord(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:1337/words/${id}/`)
+    .map(res => res)
+    .catch(this._errorHandler);
+  }
+
   saveWord(data) {
     return this.http.post(`http://localhost:1337/words/`, data)
-    .map(res => {
-      console.log(res);
-    })
+    .map(res => res)
     .catch(this._errorHandler);
   }
 

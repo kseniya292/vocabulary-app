@@ -25,7 +25,7 @@ export class DefinitionComponent implements OnInit {
        definition: this.definition
      })
      .subscribe(
-      res => console.log(res),
+      res => res,
       err => console.log(err));
    }
 

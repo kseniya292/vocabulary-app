@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WordsService } from '../words.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-vocab-list',
@@ -7,11 +8,22 @@ import { WordsService } from '../words.service';
   styleUrls: ['./vocab-list.component.css']
 })
 export class VocabListComponent implements OnInit {
-  wordList;
+  wordList = [];
 
   constructor(
-    private wordsService: WordsService
+    private wordsService: WordsService,
+    private route: ActivatedRoute,
   ) { }
+
+
+  deleteWord(id) {
+      this.wordsService.deleteWord(id)
+      .subscribe(res => res);
+  }
+
+  removeWord(index: number) {
+    this.wordList.splice(index, 1);
+}
 
   ngOnInit() {
     this.wordsService.getWords()
