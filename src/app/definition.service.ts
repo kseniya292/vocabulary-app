@@ -20,7 +20,7 @@ export class DefinitionService {
 
     getDefinition(vocabword) {
 
-      return this.http.post('http://localhost:1337/definition/', vocabword)
+      return this.http.post('http://localhost:1337/definition/', {vocabword})
       .map((res: any) => {
         return res.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0];
       })
