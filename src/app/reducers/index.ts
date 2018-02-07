@@ -44,8 +44,8 @@ import {
   // }
 
   // make sure you export for AoT
-export function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-  return function(state: any, action: any) {
+export function stateSetter(reducer: ActionReducer<State>): ActionReducer<any, any> {
+  return function(state: any, action: any): State {
     console.log('state', state); // tslint:disable-line:no-console
     console.log('action', action); // tslint:disable-line:no-console
       if (action.type === 'SET_ROOT_STATE') {
@@ -55,14 +55,14 @@ export function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
-  const _metaReducers: MetaReducer<State, any>[] = !environment.production
-  ? [stateSetter] : [];
+export const metaReducers: MetaReducer<any, any>[] = !environment.production
+  ? [stateSetter] : [stateSetter];
 
   // if ( !environment.production ) {
   //     _metaReducers.push( debugMetaReducer );
   // }
 
-  export const metaReducers = _metaReducers;
+  // export const metaReducers = _metaReducers;
 
 
 
