@@ -33,59 +33,42 @@ import {
     search: fromSearch.reducer,
   };
 
-  // // console.log all actions
-  // export function logger(reducer: ActionReducer<State>): ActionReducer<any, any> {
-  //   return function(state: State, action: any): State {
-  //     console.log('state', state); // tslint:disable-line:no-console
-  //     console.log('action', action); // tslint:disable-line:no-console
 
-  //     return reducer(state, action);
-  //   };
-  // }
-
-  // make sure you export for AoT
-export function stateSetter(reducer: ActionReducer<State>): ActionReducer<any, any> {
-  return function(state: any, action: any): State {
-    console.log('state', state); // tslint:disable-line:no-console
-    console.log('action', action); // tslint:disable-line:no-console
-      if (action.type === 'SET_ROOT_STATE') {
-          return action.payload;
-      }
-      return reducer(state, action);
-  };
-}
-
-export const metaReducers: MetaReducer<any, any>[] = !environment.production
-  ? [stateSetter] : [stateSetter];
-
-  // if ( !environment.production ) {
-  //     _metaReducers.push( debugMetaReducer );
-  // }
-
-  // export const metaReducers = _metaReducers;
-
-
+    // make sure you export for AoT
+  export function stateSetter(reducer: ActionReducer<State>): ActionReducer<any, any> {
+    return function(state: any, action: any): State {
+        console.log('state', state); // tslint:disable-line:no-console
+        console.log('action', action); // tslint:disable-line:no-console
+        if (action.type === 'SET_ROOT_STATE') {
+            return action.payload;
+        }
+        return reducer(state, action);
+    };
+  }
 
   /**
    * By default, @ngrx/store uses combineReducers with the reducer map to compose
    * the root meta-reducer. To add more meta-reducers, provide an array of meta-reducers
    * that will be composed to form the root meta-reducer.
    */
-  // export const metaReducers: MetaReducer<any, any>[] = !environment.production
-  //   ? [logger]
-  //   : [];
+  export const metaReducers: MetaReducer<any, any>[] = !environment.production
+    ? [stateSetter] : [stateSetter];
+
+  // if ( !environment.production ) {
+  //     _metaReducers.push( debugMetaReducer );
+  // }
 
   /**
-   * App Reducer Selectors
+   * Search Reducer Selectors
    */
   // export const getSearchState = createFeatureSelector<fromSearch.State>('search');
 
-//   export const getImageURL = createSelector(
-//     getSearchState,
-//     fromSearch.getImageURL
-//   );
+  // export const getImageURL = createSelector(
+  //   getSearchState,
+  //   fromSe
+  // );
 
-//   export const getImageLoading = createSelector(
-//     getSearchState,
-//     fromSearch.getImageLoading
-//   );
+  // export const getImageLoading = createSelector(
+  //   getSearchState,
+  //   fromSearch.getImageLoading
+  // );
