@@ -1,57 +1,32 @@
-import * as words from '../actions/words';
+import * as WordActions from '../actions/words';
+import { Word } from '../word';
 
 export interface State {
-    loaded: boolean;
-    loading: boolean;
-    ids: string[];
+    // loaded: boolean;
+    // loading: boolean;
+    // ids: string[];
+    words: Word[];
   }
 
   // need to give state an initial state
 
 export const initialState: State = {
-    loaded: false,
-    loading: false,
-    ids: [],
+    // loaded: false,
+    // loading: false,
+    // ids: [],
+    words: [],
   };
 
   export function reducer(
     state = initialState,
-    action: words.Actions
+    action: WordActions.Actions
   ): State {
     switch (action.type) {
-      case words.LOAD: {
-        return {
-          ...state,
-          loading: true,
-        };
-      }
-
-      case words.LOAD_SUCCESS: {
-        return {
-          loaded: true,
-          loading: false,
-          ids: action.payload.map(word => word.id),
-        };
-      }
-
-      case words.ADD_WORD_SUCCESS:
-      case words.REMOVE_WORD_FAIL: {
-        if (state.ids.indexOf(action.payload.id) > -1) {
-          return state;
-        }
-
-        return {
-          ...state,
-          ids: [...state.ids, action.payload.id],
-        };
-      }
-
-      case words.REMOVE_WORD_SUCCESS:
-      case words.ADD_WORD_FAIL: {
-        return {
-          ...state,
-          ids: state.ids.filter(id => id !== action.payload.id),
-        };
+      case WordActions.ADD_WORD: {
+          return {
+              ...state,
+              words: [...state.words.slice(), action.payload],
+          };
       }
 
       default: {
@@ -59,9 +34,3 @@ export const initialState: State = {
       }
     }
   }
-
-  export const getLoaded = (state: State) => state.loaded;
-
-  export const getLoading = (state: State) => state.loading;
-
-  export const getIds = (state: State) => state.ids;

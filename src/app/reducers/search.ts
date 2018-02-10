@@ -1,14 +1,15 @@
 import * as search from '../actions/search';
+import { Word } from '../word';
 
 export interface State {
-  searchTerm: string;
-  results: string;
+  word: string;
+  definition: string;
 }
 
 // need to give state an initial state
 export const initialState: State = {
-    searchTerm: '',
-    results: ''
+    word: '',
+    definition: ''
 };
 
 export function reducer(state = initialState, action: search.Actions): State {
@@ -16,16 +17,21 @@ export function reducer(state = initialState, action: search.Actions): State {
     case search.SEARCH: {
       return {
         ...state,
-        searchTerm: action.payload
+        word: action.payload
       };
     }
     case search.SEARCH_SUCCESS: {
       return {
         ...state,
-        results: action.payload
+        word: action.payload.word,
+        definition: action.payload.definition
       };
     }
     default:
       return state;
   }
 }
+
+export const getWord = (state: State) => state.word;
+
+export const getDefinition = (state: State) => state.definition;

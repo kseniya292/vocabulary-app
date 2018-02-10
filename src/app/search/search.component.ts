@@ -17,7 +17,6 @@ import { WordsService } from '../words.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  searchTerm: Observable<string>;
   errorMsg: string;
 
   constructor(
@@ -29,8 +28,6 @@ export class SearchComponent implements OnInit {
 
   // calls the getDefinition service
   getDefinition(searchTerm: string) {
-    this.store.dispatch(new searchActions.Search(searchTerm));
-
     this.definitionService.getDefinition(searchTerm)
     .subscribe(result => {
       // sends word and definition to shared service

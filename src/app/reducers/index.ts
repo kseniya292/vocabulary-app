@@ -61,14 +61,14 @@ import {
   /**
    * Search Reducer Selectors
    */
-  // export const getSearchState = createFeatureSelector<fromSearch.State>('search');
+  export const getSearchState = createFeatureSelector<fromSearch.State>('search');
 
-  // export const getImageURL = createSelector(
-  //   getSearchState,
-  //   fromSe
-  // );
+  export const getWords = createSelector(
+    getSearchState,
+    fromSearch.getWord,
+  );
 
-  // export const getImageLoading = createSelector(
-  //   getSearchState,
-  //   fromSearch.getImageLoading
-  // );
+  export const getDefinitions = createSelector(
+    getSearchState,
+    fromSearch.getDefinition
+  );
