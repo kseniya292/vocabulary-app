@@ -13,6 +13,8 @@ import * as fromRoot from './reducers';
 import { reducers, metaReducers } from './reducers';
 
 import { StoreModule, Store } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { WordEffects } from './effects/words';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
@@ -43,6 +45,7 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
     routesModule,
     BrowserTransferStateModule,
     StoreModule.forRoot(fromRoot.reducers, { metaReducers }),
+    EffectsModule.forRoot([WordEffects])
   ],
   providers: [DefinitionService, WordsService],
   bootstrap: [AppComponent]

@@ -48,7 +48,7 @@ export class RemoveWordSuccess implements Action {
 export class RemoveWordFail implements Action {
   readonly type = REMOVE_WORD_FAIL;
 
-  constructor(public payload: Word) {}
+  constructor(public payload: any) {}
 }
 
 export type Actions =
