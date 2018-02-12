@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
-import * as WordActions from '../actions/words';
+import * as wordActions from '../actions/words';
 
 @Component({
   selector: 'app-definition',
@@ -15,27 +15,22 @@ import * as WordActions from '../actions/words';
   styleUrls: ['./definition.component.css']
 })
 export class DefinitionComponent implements OnInit {
-  searchTerm: Observable<string>;
-  definition: Observable<string>;
+  searchTerm$: Observable<string>;
+  definition$: Observable<string>;
 
   constructor(
     private wordsService: WordsService,
     private store: Store<fromRoot.State>
   ) {
-    this.definition = store.select(fromRoot.getDefinitions);
-    this.searchTerm = store.select(fromRoot.getWords);
+    this.definition$ = store.select(fromRoot.getDefinitions);
+    this.searchTerm$ = store.select(fromRoot.getWords);
    }
 
    postWord() {
-     console.log(this.searchTerm, this.definition);
-    //  this.wordsService.saveWord({
-    //    word: this.searchTerm,
-    //    definition: this.definition
-    //  })
-    //  .subscribe(res => {
-    //    this.store.dispatch(new WordActions.AddWord(res));
-    //   },
-    //   err => console.log(err));
+     this.store.dispatch(new wordActions.AddWord({
+       word: '',
+       definition: ''
+     }));
    }
 
   ngOnInit() {
