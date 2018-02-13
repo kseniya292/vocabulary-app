@@ -53,14 +53,6 @@ export class WordsService {
 
     return this.http.get(`http://localhost:1337/words/`)
     .map((res: Observable<any>) => {
-      // const words = [];
-      // res.forEach((word) => {
-      //   words.push({
-      //     word : word.word,
-      //     definition: word.definition,
-      //     id: word.id,
-      //   });
-      // })
       this.state.set(WORDS_KEY, res as any);
       return res;
     })

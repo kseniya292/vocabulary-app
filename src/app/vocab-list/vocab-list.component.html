@@ -2,9 +2,9 @@
   <h2>My Saved Words</h2>
   <p>click on word to see details</p>
   <ul>
-      <li *ngFor="let word of wordList; let index = index">
+      <li *ngFor="let word of wordList$ | async; let index = index">
           <a [routerLink]="['/details', word.id]">{{ word.word }}</a>
-          <a (click)="deleteWord(word.id); removeWord(index)">delete word</a>
+          <a (click)="deleteWord(word.id)">delete word</a>
       </li>
     </ul>
   <button md-raised-button class="btn btn-default"  type="button" routerLink="/">Search Another Word</button>

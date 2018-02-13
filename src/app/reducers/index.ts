@@ -15,6 +15,7 @@ import {
    */
 
   import * as fromSearch from './search';
+  import * as fromWords from './words';
 
   /**
    * As mentioned, we treat each reducer like a table in a database. This means
@@ -22,6 +23,7 @@ import {
    */
   export interface State {
     search: fromSearch.State;
+    words: fromWords.State;
   }
 
   /**
@@ -31,6 +33,7 @@ import {
    */
   export const reducers: ActionReducerMap<State> = {
     search: fromSearch.reducer,
+    words: fromWords.reducer,
   };
 
 
@@ -63,12 +66,24 @@ import {
    */
   export const getSearchState = createFeatureSelector<fromSearch.State>('search');
 
-  export const getWords = createSelector(
+  export const getWord = createSelector(
     getSearchState,
     fromSearch.getWord,
   );
 
-  export const getDefinitions = createSelector(
+  export const getDefinition = createSelector(
     getSearchState,
     fromSearch.getDefinition
   );
+
+    /**
+   * Words Reducer Selectors
+   */
+  export const getWordState = createFeatureSelector<fromWords.State>('words');
+
+  export const getWords = createSelector(
+    getWordState,
+    fromWords.getWords,
+  );
+
+

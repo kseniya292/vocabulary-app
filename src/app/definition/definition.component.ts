@@ -22,8 +22,8 @@ export class DefinitionComponent implements OnInit {
     private wordsService: WordsService,
     private store: Store<fromRoot.State>
   ) {
-    this.definition$ = store.select(fromRoot.getDefinitions);
-    this.searchTerm$ = store.select(fromRoot.getWords);
+    this.definition$ = store.select(fromRoot.getDefinition);
+    this.searchTerm$ = store.select(fromRoot.getWord);
    }
 
    postWord() {

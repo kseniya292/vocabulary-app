@@ -2,8 +2,8 @@ import * as WordActions from '../actions/words';
 import { Word } from '../word';
 
 export interface State {
-    // loaded: boolean;
-    // loading: boolean;
+    loaded: boolean;
+    loading: boolean;
     // ids: string[];
     words: Word[];
   }
@@ -11,8 +11,8 @@ export interface State {
   // need to give state an initial state
 
 export const initialState: State = {
-    // loaded: false,
-    // loading: false,
+    loaded: false,
+    loading: false,
     // ids: [],
     words: [],
   };
@@ -22,6 +22,21 @@ export const initialState: State = {
     action: WordActions.Actions
   ): State {
     switch (action.type) {
+      case WordActions.GET_WORDS: {
+        return Object.assign({}, state, {
+          loading: true
+        });
+      }
+
+      case WordActions.GET_WORDS_SUCCESS: {
+        const books = action.payload;
+
+        return {
+          loaded: true,
+          loading: false,
+          words: [...action.payload],
+        };
+      }
       case WordActions.ADD_WORD: {
           return {
               ...state,
@@ -34,3 +49,5 @@ export const initialState: State = {
       }
     }
   }
+
+  export const getWords = (state: State) => state.words;

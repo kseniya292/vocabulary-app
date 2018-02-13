@@ -35,8 +35,23 @@ export class WordEffects {
         // If successful, dispatch success action with result
         map((data: Word) => new wordActions.AddWordSuccess(data)),
         // If request fails, dispatch failed action
-        catchError(() => of(new wordActions.RemoveWordFail({})))
+        catchError(() => of(new wordActions.AddWordFail({})))
       )
     )
+  );
+
+  @Effect()
+  getBooks$: Observable<Action> = this.actions$.pipe(
+    ofType<wordActions.GetWords>(wordActions.GET_WORDS),
+    withLatestFrom(this.state$),
+    switchMap(() => {
+      return this.wordsService.getWords()
+      .pipe(
+         // If successful, dispatch success action with result
+        map((res) => new wordActions.GetWordsSucess(res)),
+        // If request fails, dispatch failed action
+        catchError(() => of(new wordActions.GetWordsFail({})))
+      );
+    })
   );
 }
