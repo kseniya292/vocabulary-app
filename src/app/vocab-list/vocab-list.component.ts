@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { WordsService } from '../words.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatFormFieldControl,
+  MatCardModule,
+  MatDividerModule,
+  MatListModule,
+  MatIconModule} from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 

@@ -1,11 +1,19 @@
-<div class="container">
-  <h2>My Saved Words</h2>
-  <p>click on word to see details</p>
-  <ul>
-      <li *ngFor="let word of wordList$ | async; let index = index">
-          <a [routerLink]="['/details', word.id]">{{ word.word }}</a>
-          <a (click)="deleteWord(word.id)">delete word</a>
-      </li>
-    </ul>
-  <button md-raised-button class="btn btn-default"  type="button" routerLink="/">Search Another Word</button>
-</div> <!--container-->
+<div class="row">
+    <mat-card class="card-form col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3">
+        <mat-card-title>My Saved Words</mat-card-title>
+        <mat-card-content>
+            <p>click on word to see details</p>
+                <mat-list>
+                    <mat-list-item *ngFor="let word of wordList$ | async; let index = index">
+                        <a [routerLink]="['/details', word.id]">{{ word.word }}</a>
+                        <button mat-icon-button (click)="deleteWord(word.id)">
+                            <mat-icon svgIcon="delete"></mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+                <div class="button-row">
+                    <button mat-raised-button color="primary" routerLink="/">Search Another Word</button>
+                </div>
+        </mat-card-content>
+    </mat-card>
+</div>

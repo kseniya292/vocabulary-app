@@ -1,21 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-8 col-xs-push-2 col-sm-6 col-sm-push-3 text-center">
-      <em><p>"What does that mean?"</p></em>
-      <form>
-        <!-- <mat-form-field> -->
-        <input type="text" class="form-control"
-               required
-               name="vocabword" #vocabword placeholder="enter vocab word here...">
-        <!-- </mat-form-field> -->
-        <button md-raised-button class="btn btn-default" (click)="getDefinition(vocabword.value)" type="button">Define</button>
-      </form>
-      <div *ngIf="vocabword.invalid"> 
-        <p [hidden]="!vocabword.errors.required" class="error">Please enter a word.</p>
-      </div>  
-      <div *ngIf="errorMsg">
-        <p [hidden] class="error">{{ errorMsg }}</p>
-      </div>  
-    </div>
-  </div>
+<div class="row">
+  <mat-card class="card-form col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <mat-card-title>What does that mean?</mat-card-title>
+      <mat-card-content>
+        <form>
+            <mat-form-field class="example-full-width">
+              <input matInput required name="vocabword" #vocabword placeholder="enter vocab word here...">
+            </mat-form-field>
+            <div class="button-row">
+              <button mat-raised-button (click)="getDefinition(vocabword.value)" color="primary">Define</button>
+            </div>
+            <div *ngIf="vocabword.invalid"> 
+                <p [hidden]="!vocabword.errors.required" class="error">Please enter a word.</p>
+              </div>  
+              <div *ngIf="errorMsg">
+                <p [hidden] class="error">{{ errorMsg }}</p>
+              </div>
+        </form>
+    </mat-card-content>
+  </mat-card>
 </div>

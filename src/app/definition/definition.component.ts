@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { WordsService } from '../words.service';
 import { DefinitionService } from '../definition.service';
+import { MatInputModule, MatButtonModule, MatFormFieldModule, MatFormFieldControl, MatCardModule } from '@angular/material';
+
 
 import { Observable } from 'rxjs/Observable';
 

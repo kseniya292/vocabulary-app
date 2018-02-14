@@ -1,15 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-8 col-xs-push-2 col-sm-6 col-sm-push-3 text-center">
-      <h1>
-        {{ searchTerm$ | async }}
-      </h1>
-      <div class="definition">
-        <p>{{ definition$ | async }}</p>
-      </div>
-      <button md-raised-button class="btn btn-default"  type="button" (click)="postWord()">Add to List</button>
-      <button md-raised-button class="btn btn-default"  type="button" routerLink="/list">View My List</button>
-      <button md-raised-button class="btn btn-default"  type="button" routerLink="/">Back</button>
-    </div> <!--col-->
-  </div> <!--row-->
-</div> <!--container-->
+<div class="row">
+    <mat-card class="card-form col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <mat-card-title>{{ searchTerm$ | async }}</mat-card-title>
+        <mat-card-content>
+            <p>{{ definition$ | async }}</p>
+            <div class="button-row">
+              <button mat-raised-button color="primary" (click)="postWord()">Save Word</button>
+            </div>
+            <div class="button-row">
+                <button mat-raised-button color="primary" routerLink="/list">View My Words</button>
+            </div>
+            <div class="button-row">
+                <button mat-raised-button color="primary" routerLink="/">Back</button>
+            </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

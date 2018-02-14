@@ -1,7 +1,17 @@
-import { BrowserModule, BrowserTransferStateModule, TransferState, makeStateKey} from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule, TransferState, makeStateKey, DomSanitizer} from '@angular/platform-browser';
 import { NgModule, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatFormFieldModule, MatFormFieldControl } from '@angular/material';
+import {
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatFormFieldControl,
+    MatToolbarModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatIconModule,
+    MatIconRegistry } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
@@ -40,6 +50,11 @@ export const NGRX_STATE = makeStateKey('NGRX_STATE');
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
     routesModule,
@@ -55,7 +70,10 @@ export class AppModule {
     public constructor(
       private readonly transferState: TransferState,
       private readonly store: Store<fromRoot.State>,
+      private matIconRegistry: MatIconRegistry,
+      private domSanitizer: DomSanitizer,
   ) {
+      matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
       const isBrowser = this.transferState.hasKey<any>(NGRX_STATE);
 
       if (isBrowser) {

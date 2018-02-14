@@ -1,7 +1,7 @@
 import { Component, OnInit, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { MatInputModule, MatButtonModule, MatFormFieldModule, MatFormFieldControl } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatFormFieldModule, MatFormFieldControl, MatCardModule } from '@angular/material';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { Store } from '@ngrx/store';
